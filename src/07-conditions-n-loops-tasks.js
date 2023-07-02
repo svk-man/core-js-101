@@ -494,8 +494,30 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const combs = [
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 0], [1, 1], [2, 2]],
+    [[0, 0], [0, 1], [0, 2]],
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[1, 0], [1, 1], [1, 2]],
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 2], [1, 1], [2, 0]],
+  ];
+
+  let isWinner = false;
+  let player;
+  for (let i = 0; i < combs.length && !isWinner; i += 1) {
+    const firstElement = position[combs[i][0][0]][combs[i][0][1]];
+    const secondElement = position[combs[i][1][0]][combs[i][1][1]];
+    const thirdElement = position[combs[i][2][0]][combs[i][2][1]];
+    isWinner = firstElement === secondElement && secondElement === thirdElement
+      && firstElement !== undefined;
+    player = isWinner ? firstElement : undefined;
+  }
+
+  return player;
 }
 
 

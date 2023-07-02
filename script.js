@@ -1,22 +1,32 @@
-function getCommonDirectoryPath(pathes) {
-  const changedPathes = pathes.map((path) => path.split('/'));
+function evaluateTicTacToePosition(position) {
+  const combs = [
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 0], [1, 1], [2, 2]],
+    [[0, 0], [0, 1], [0, 2]],
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[1, 0], [1, 1], [1, 2]],
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 2], [1, 1], [2, 0]],
+  ];
 
-  const commonPath = [];
-  let isCommonPartPath = true;
-  for (let i = 0; i < changedPathes[0].length && isCommonPartPath; i += 1) {
-    const commonPartPath = changedPathes[0][i];
-    for (let j = 0; j < changedPathes.length && isCommonPartPath; j += 1) {
-      if (commonPartPath !== changedPathes[j][i]) {
-        isCommonPartPath = false;
-      }
-    }
-
-    if (isCommonPartPath) {
-      commonPath.push(commonPartPath);
-    }
+  let isWinner = false;
+  let player;
+  for (let i = 0; i < combs.length && !isWinner; i += 1) {
+    const firstElement = position[combs[i][0][0]][combs[i][0][1]];
+    const secondElement = position[combs[i][1][0]][combs[i][1][1]];
+    const thirdElement = position[combs[i][2][0]][combs[i][2][1]];
+    console.log(firstElement + secondElement + thirdElement);
+    console.log(firstElement === secondElement && secondElement === thirdElement);
+    isWinner = firstElement === secondElement && secondElement === thirdElement
+      && firstElement !== undefined;
+    player = isWinner ? firstElement : undefined;
   }
 
-  return commonPath.length ? `${commonPath.join('/')}/` : '';
+  return player;
 }
 
-console.log(getCommonDirectoryPath(['/web/images/image1.png', '/web/images/image2.png']));
+
+console.log(evaluateTicTacToePosition([['X', '0', 'X'],
+  ['X', '0', 'X'],
+  ['0', 'X', '0']]));
