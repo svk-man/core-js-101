@@ -1,11 +1,11 @@
-function memoize(func) {
-  const savedNumber = func();
-  return () => savedNumber;
+function logger(func, logFunc) {
+  return (...args) => {
+    logFunc(`${func.name}(${JSON.stringify(args)}) starts`);
+    logFunc(`${func.name}(${JSON.stringify(args)}) ends`);
+
+    return func(args);
+  };
 }
 
-const memoizer = memoize(() => Math.random());
-console.log(memoizer());
-console.log(memoizer());
-console.log(memoizer());
-console.log(memoizer());
-console.log(memoizer());
+const cosLogger = logger(['expected', 'test', 1], 0);
+
