@@ -1,11 +1,9 @@
-function logger(func, logFunc) {
-  return (...args) => {
-    logFunc(`${func.name}(${JSON.stringify(args)}) starts`);
-    logFunc(`${func.name}(${JSON.stringify(args)}) ends`);
-
-    return func(args);
-  };
+function getIdGeneratorFunction(startFrom) {
+  let id = startFrom;
+  return () => id += 1;
 }
 
-const cosLogger = logger(['expected', 'test', 1], 0);
-
+const getId4 = getIdGeneratorFunction(4);
+const getId10 = getIdGeneratorFunction(10);
+console.log(getId4());
+console.log(getId10());
