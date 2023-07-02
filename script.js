@@ -1,15 +1,11 @@
-function getPolynom(...args) {
-  console.log(args);
-  if (!args.length) {
-    return null;
-  }
-
-  const functions = [];
-  [args].reverse().forEach((element, index) => {
-    functions.push((x) => ((index >= 1) ? element * x ** index : element));
-  });
-  return (x) => functions.reduce((acc, value) => acc + value(x), 0);
+function memoize(func) {
+  const savedNumber = func();
+  return () => savedNumber;
 }
 
-
-console.log(getPolynom()(3));
+const memoizer = memoize(() => Math.random());
+console.log(memoizer());
+console.log(memoizer());
+console.log(memoizer());
+console.log(memoizer());
+console.log(memoizer());
