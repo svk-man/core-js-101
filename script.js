@@ -1,10 +1,5 @@
-function getDigitalRoot(num) {
-  let sum = num.toString().split('').reduce((acc, value) => acc + Number(value), 0);
-  if (sum > 9) {
-    sum = getDigitalRoot(sum);
-  }
-
-  return sum;
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
-console.log(getDigitalRoot(12345));
+console.log(toNaryString(1024, 2));
